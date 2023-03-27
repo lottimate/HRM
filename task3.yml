@@ -1,0 +1,7 @@
+---
+
+- name: Hostname set to web.example.org
+  hosts: webservers
+
+  roles:
+    - Prictice3

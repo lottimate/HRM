@@ -1,0 +1,7 @@
+---
+
+- name: MySQL generate binary logs
+  hosts: webservers
+
+ - roles:
+   - Prictice4
