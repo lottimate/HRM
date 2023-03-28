@@ -6,11 +6,11 @@
     name: "{{ var_package }}"
     state: present
     
-- name: Start and enable Apache service
-  ansible.builtin.service:
-    name: "{{ var_service }}"
-    state: started
-    enabled: true
+# name: Start and enable Apache service
+ # ansible.builtin.service:
+#    name: "{{ var_service }}"
+#    state: started
+#    enabled: true
     
 - name: Allow Apache service on firewall
   ansible.posix.firewalld:
@@ -19,15 +19,23 @@
     permanent: true
     state: enabled
 
-- name: Restart Apache service
-  ansible.builtin.service:
-    name: "{{ var_service}}"
-    state: restarted
-    
 - name: Add port to firewall
   ansible.posix.firewalld:
-  port: 18111/tcp
-  permanent: true
-  state: enabled
+   port: "{{ var_firewall_port }}/tcp"
+   permanent: true
+   state: enabled
+   #setype: "{{ var_seport_type }}"
   
+- name: Change Apache port to 18111
+  lineinfile:
+   path: /etc/httpd/conf/httpd.conf
+   regexp: '^Listen'
+   line: 'Listen 18111'
+  notify: restart httpd 
   
+- name: Setting Selinux
+  ansible.builtin.file:
+   path: "{{ var_se_path }}"
+   setype: "{{ var_seport_type }}"
+   setype: "{{ var_setype }}"
+   

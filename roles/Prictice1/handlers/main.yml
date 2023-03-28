@@ -1,2 +1,9 @@
 ---
 # handlers file for Prictice1
+
+- name: Restart httpd.service
+  service:
+   name: httpd
+   enabled: true
+   status: restarted
+   

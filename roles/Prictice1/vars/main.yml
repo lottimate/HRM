@@ -3,5 +3,7 @@
 var_package: httpd
 var_service: httpd.service
 var_firewall_service: http
-#var_setype: "httpd_sys_content_t"
-#var_seport_type: "http_port_t"
+var_firewall_port: 18111
+var_setype: "httpd_sys_content_t"
+var_seport_type: "http_port_t"
+var_se_path: "/etc/httpd/(/.*)?"
