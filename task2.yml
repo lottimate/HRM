@@ -1,0 +1,8 @@
+---
+
+- name: Changing default hostname to web.example.org
+  hosts: webservers
+  
+  roles:
+   - Prictice2
+   

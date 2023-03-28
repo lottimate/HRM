@@ -34,8 +34,8 @@
   notify: restart httpd 
   
 - name: Setting Selinux
-  ansible.builtin.file:
-   path: "{{ var_se_path }}"
-   setype: "{{ var_seport_type }}"
-   setype: "{{ var_setype }}"
-   
+  community.general.seport:
+    ports: 18111
+    proto: tcp
+    setype: http_port_t
+    state: present

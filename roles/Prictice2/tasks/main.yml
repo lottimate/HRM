@@ -1,2 +1,15 @@
 ---
 # tasks file for Prictice2
+
+- name: Changing default hostname to web.example.org
+  ansible.builtin.hostname:
+   name: "{{ var_new_hostname }}"
+  
+- name: Updating /etc/hosts to actual status
+  lineinfile:
+   path: /etc/hosts
+   regexp: '^127\.0\.0\.1.*'
+   line: '127.0.0.1 {{ var_new_hostname }} localhost'
+   state: present
+  notify: restart network
+  
