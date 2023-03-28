@@ -1,2 +1,46 @@
 ---
 # tasks file for Prictice3
+
+- name: Installing MySQL server
+  ansible.builtin.dnf:
+   name: "{{ var_package }}"
+   state: present
+   
+- name: Adding MySQL port to firewall
+  ansible.posix.firewalld:
+   port: "{{ var_firewall_port }}/tcp"
+   permanent: true
+   state: enabled
+   
+- name: Allowing MySQL service on firewall
+  ansible.posix.firewalld:
+   service: "{{ var_firewall_service }}"
+   immediate: true
+   permanent: true
+   state: enabled
+   
+- name: Stopping MySQL service
+  systemd:
+   name: "{{ var_service_name }}"
+   state: stopped
+   
+- name: Updating MySQL my.cnf
+  lineinfile:
+   path: "{{ var_path }}"
+   regexp: '^port='
+   line: 'port={{ var_firewall_port }}'
+   state: present
+   
+- name: Starting MySQL service
+  systemd:
+   name: "{{ var_service_name }}"
+   state: started
+  notify: restart mysql
+  
+- name: Setting Selinux
+  community.general.seport:
+    ports: 4500
+    proto: tcp
+    setype: mysqld_port_t
+    state: present
+    

@@ -1,6 +1,6 @@
 ---
 
-- name: Hostname set to web.example.org
+- name: Setting MySQL port to 4500
   hosts: webservers
 
   roles:

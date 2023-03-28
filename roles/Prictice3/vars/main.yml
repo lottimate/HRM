@@ -1,2 +1,7 @@
 ---
 # vars file for Prictice3
+var_package: mysql-server
+var_firewall_service: mysql
+var_firewall_port: 4500
+var_path: /etc/my.cnf
+var_service_name: mysqld

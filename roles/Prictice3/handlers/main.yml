@@ -1,2 +1,7 @@
 ---
 # handlers file for Prictice3
+- name: restart mysql
+  service:
+   name: "{{ var_service_name }}"
+   state: restarted
+   enabled: true
