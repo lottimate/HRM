@@ -18,4 +18,16 @@
     immediate: true
     permanent: true
     state: enabled
+
+- name: Restart Apache service
+  ansible.builtin.service:
+    name: "{{ var_service}}"
+    state: restarted
     
+- name: Add port to firewall
+  ansible.posix.firewalld:
+  port: 18111/tcp
+  permanent: true
+  state: enabled
+  
+  
