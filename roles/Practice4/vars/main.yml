@@ -1,0 +1,5 @@
+---
+# vars file for Prictice4
+var_service_name: mysqld
+var_python_package: python3-pip
+var_path: /etc/my.cnf

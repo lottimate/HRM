@@ -1,0 +1,30 @@
+---
+# tasks file for Prictice4
+
+- name: Stopping MySQL service
+  service:
+   name: "{{ var_service_name }}"
+   state: stopped
+   
+- name: Installing Python3
+  ansible.builtin.dnf:
+   name: "{{ var_python_package }}"
+   state: present
+   
+- name: Installing PyMySQL
+  pip:
+   name: pymysql
+   state: present
+   
+- name: Updating MySQL configuration to start binary logging
+  lineinfile:
+   path: "{{ var_path }}"
+   regexp: '^log-bin='
+   line: 'log-bin=/var/log/mysql/mysql-bin.log'
+   state: present
+   
+- name: Starting MySQL service
+  service:
+   name: "{{ var_service_name }}"
+   state: restarted
+  notify: restart mysql

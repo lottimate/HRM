@@ -4,4 +4,4 @@
   hosts: webservers
 
   roles:
-    - Prictice1
+    - Practice1

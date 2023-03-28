@@ -3,5 +3,5 @@
 - name: MySQL generate binary logs
   hosts: webservers
 
- - roles:
-   - Prictice4
+  roles:
+    - Practice4
